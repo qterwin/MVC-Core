@@ -1,0 +1,136 @@
+﻿@model IEnumerable<mvccore.dto.Book.UserDTO>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="row>">
+            <div class="col-md-12">
+
+                <div class="float-left">
+                    <h2> Book Lending Users </h2>
+                </div>
+
+                <div class="float-right">
+                    <a id="btnAddUserYes" asp-action="AddUser" asp-controller="Home" class="btn btn-primary" value="Add"> 
+                        <i class="fa fa-user"></i> Add User
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="Page Navigation">
+                    <ul class="pagination">
+                        <a class="page-link" href="@Url.Action("Index", new {page = 1})"><<</a>
+                        <a class="page-link" href="@Url.Action("Index", new {page =  ViewBag.CurrentPage - 1})"><</a>
+                        @for(int i = 1; i <= ViewBag.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new {page = i})">@i</a>
+                            </li>
+                        }
+                        <a class="page-link" href="@Url.Action("Index", new {page =  ViewBag.CurrentPage + 1})">></a>
+                        <a class="page-link" href="@Url.Action("Index", new {page = ViewBag.TotalPages})">>></a>
+                    </ul>
+                </nav>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">
+                                    Action
+                                </th>
+                                <th style="text-align:center">
+                                    First Name
+                                </th>
+                                <th style="text-align:center">
+                                    Middle Name
+                                </th>
+                                <th style="text-align:center">
+                                    Surname
+                                </th>
+                                <th style="text-align:center">
+                                    Created Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                foreach(var user in Model)
+                                {
+                                    <tr>
+                                        <td align="center"> 
+                                            <a id="btnEditUser"  asp-action="EditUser" asp-controller="Home" asp-route-id=" @user.UserId" class="btn btn-outline-info">
+                                                <i class="fa fa-edit"></i> Edit
+                                            </a>
+                                            <button class="btn btn-outline-danger" id="btnDeleteUser" data-user-userid="@user.UserId"> 
+                                                <i class="fa fa-trash"></i> Delete
+                                            </button>
+                                        </td>
+                                       
+                                        <td align="center">
+                                            @user.Name
+                                        </td>
+                                        <td align="center">
+                                            @user.MiddleName
+                                        </td>
+                                        <td align="center">
+                                            @user.Surname
+                                        </td>
+                                        <td align="center">
+                                            @user.CreatedDate
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center">No Data</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteModal">
+    
+</div>
+
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            $(document).on("click", "#btnDeleteUser", function () {
+                var userID =$(this).data('user-userid')
+                console.log(userID);
+                $.ajax({
+                    type: "GET",
+                    url: "Home/_DeleteUser",
+                    data: {
+                        id : userID
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $('#deleteModal').append(response);
+                        $('#deleteUserModal').modal("show");
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+            });
+        });
+    </script>
+}

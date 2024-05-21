@@ -1,0 +1,58 @@
+﻿@model mvccore.dto.Book.BookUpdateDTO
+
+@using (Html.BeginForm("EditBook", "Book", FormMethod.Post))
+{
+    <div class=" card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="float-left">
+                        <h2>Edit Book</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, "Name")
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, "Description")
+                        @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Icount, "Icount")
+                        @Html.TextBoxFor(model => model.Icount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Icount, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.HiddenFor(model => model.BookId)
+                    @Html.HiddenFor(model => model.CreatedDate)
+                    @* @Html.HiddenFor(model => model.Active) *@
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <div class="float-right form-group">
+                <button type="button" class="btn btn-primary" onclick="window.history.back()" >Close</button>
+                <input type="submit" id="btnSaveUserYes" class="btn btn-success" value="Save" />
+            </div>
+
+        </div>
+    </div>
+}

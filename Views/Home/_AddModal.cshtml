@@ -1,0 +1,47 @@
+﻿@model mvccore.Models.Book.User
+ @using (Html.BeginForm("AddUser", "Home", FormMethod.Post))
+                {
+                @Html.AntiForgeryToken();
+                <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @* Content *@
+               
+                    
+                
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        @Html.LabelFor(model => model.Name,"Name")
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Name, "")
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        @Html.LabelFor(model => model.MiddleName, "Middlename")
+                                        @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.MiddleName, "")
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        @Html.LabelFor(model => model.Surname, "Surname")
+                                        @Html.TextBoxFor(model => model.Surname, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Surname, "")
+                                    </div>
+
+                                </div>
+
+                                @* End of Content *@
+                            </div>
+                          c
+                        </div>
+                    </div>
+                </div>
+}

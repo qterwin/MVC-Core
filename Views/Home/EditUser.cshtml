@@ -1,0 +1,58 @@
+﻿@model mvccore.dto.Book.UserDTO
+
+@using (Html.BeginForm("EditUser", "Home", FormMethod.Post))
+{
+    <div class=" card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="float-left">
+                        <h2>Edit User</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, "Name")
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MiddleName, "Middle Name")
+                        @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Surname, "Surname")
+                        @Html.TextBoxFor(model => model.Surname, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.HiddenFor(model => model.UserId)
+                    @Html.HiddenFor(model => model.CreatedDate)
+                    @* @Html.HiddenFor(model => model.Active) *@
+                </div>         
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <div class="float-right form-group">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" id="btnSaveUserYes" class="btn btn-success" value="Save" />
+            </div>
+
+        </div>
+    </div>
+}

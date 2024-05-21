@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+@model mvccore.Models.Book.User
+@{
+    Layout = null;
+
+}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .login {
+            min-height: 100vh;
+        }
+
+        .bg-image {
+            background-image: url('https://bootstrapious.com/i/snippets/sn-page-split/bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .login-heading {
+            font-weight: 300;
+        }
+
+        .btn-login {
+            font-size: 0.9rem;
+            letter-spacing: 0.05rem;
+            padding: 0.75rem 1rem;
+        }
+    </style>
+    <title>Login Form</title>
+</head>
+
+<body>
+    @* <div class="container mt-5">
+    <div class="row justify-content-center">
+    <div class="col-md-6">
+    <div class="card">
+    <div class="card-header">
+    <h3 class="text-center">LOGIN KA NA POGI</h3>
+    </div>
+    <div class="card-body">
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+    <div class="mb-3">
+    <div class="alert alert-danger">
+    <ul>
+    @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+    {
+    <li>@modelError.ErrorMessage</li>
+    }
+    </ul>
+    </div>
+    </div>
+    }
+
+    @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { id = "myForm" }))
+    {
+    <div class="mb-3">
+    <div class="form-group">
+    @Html.LabelFor(model => model.Username, new {@class = "form-label"})
+    @Html.TextBoxFor(model => model.Username, new { @class = "form-control", autocomplete = "off"})
+    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+    </div>
+    <div class="mb-3">
+    @Html.LabelFor(model => model.Password, new { @class = "form-label"} )
+    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type="password"})
+    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    </div>
+    <div class="text-center">
+    <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+    </div>
+    }
+    </div>
+    </div>
+    </div>
+    </div>
+    </div> *@
+
+    <div class="container-fluid ps-md-0">
+        <div class="row g-0">
+            <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+            <div class="col-md-8 col-lg-6">
+                <div class="login d-flex align-items-center py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 col-lg-8 mx-auto">
+                                <h3 class="login-heading mb-4">Welcome back, Cute!</h3>
+
+                                <!-- Sign In Form -->
+                                @* <form>
+                                <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Email address</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">Password</label>
+                                </div>
+
+                                <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                                <label class="form-check-label" for="rememberPasswordCheck">
+                                Remember password
+                                </label>
+                                </div>
+
+                                <div class="d-grid">
+                                <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Sign in</button>
+                                <div class="text-center">
+                                <a class="small" href="#">Forgot password?</a>
+                                </div>
+                                </div>
+
+                                </form> *@
+
+                                <div class="card-body">
+
+                                    @if (!ViewData.ModelState.IsValid)
+                                    {
+                                        <div class="mb-3">
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                                    {
+                                                        <li>@modelError.ErrorMessage</li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { id = "myForm" }))
+                                    {
+                                        <div class="mb-3">
+
+                                            <div class="form-group">
+                                                @* @Html.LabelFor(model => model.Name, new { @class = "form-label" }) *@
+                                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", autocomplete = "off", placeholder = "Username" })
+                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                @* @Html.LabelFor(model => model.Username, new { @class = "form-label" }) *@ <br />
+                                                @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control", autocomplete = "off", placeholder = "Username" })
+                                                @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                @* @Html.LabelFor(model => model.Username, new { @class = "form-label" }) *@ <br />
+                                                @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", autocomplete = "off", placeholder = "Username" })
+                                                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                @* @Html.LabelFor(model => model.Username, new { @class = "form-label" }) *@ <br />
+                                                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", autocomplete = "off", placeholder = "Username" })
+                                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                @* @Html.LabelFor(model => model.Username, new { @class = "form-label" }) *@ <br />
+                                                @Html.TextBoxFor(model => model.PassWord, new { @class = "form-control", autocomplete = "off", placeholder = "Username" })
+                                                @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="d-grid">
+                                                <a class="btn btn-lg btn-outline-secondary btn-login text-uppercase fw-bold mb-2" asp-action="RegisterUser" asp-controller="">Register</a>
+                                            </div>
+
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentNode.classList.add('active');
+            });
+
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.parentNode.classList.remove('active');
+                }
+            });
+        });
+
+        // For Demo Purpose [Changing input group text on focus]
+        $(function () {
+            $('input, select').on('focus', function () {
+                $(this).parent().find('.input-group-text').css('border-color', '#80bdff');
+            });
+            $('input, select').on('blur', function () {
+                $(this).parent().find('.input-group-text').css('border-color', '#ced4da');
+            });
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+﻿@model IEnumerable<mvccore.dto.Book.bookDTO>
+@{
+    ViewData["Title"] = "Book list";
+}
+<div class="card">
+    <div class="card-header">
+        <div class="row>">
+            <div class="col-md-12">
+
+                <div class="float-left">
+                    <h2> List of Books Available </h2>
+                </div>
+
+                <div class="float-right">
+                    <a id="btnAddBook" asp-action="AddBook" asp-controller="Book" class="btn btn-primary" value="Add"> 
+                        <i class="fa fa-book"></i> Add Book
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="Page Navigation">
+                    <ul class="pagination">
+                        <a class="page-link" href="@Url.Action("Index", new {page = 1})"><<</a>
+                        <a class="page-link" href="@Url.Action("Index", new {page =  ViewBag.CurrentPage - 1})"><</a>
+                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new {page = i})">@i</a>
+                            </li>
+                        }
+                        <a class="page-link" href="@Url.Action("Index", new {page =  ViewBag.CurrentPage + 1})">></a>
+                        <a class="page-link" href="@Url.Action("Index", new {page = ViewBag.TotalPages})">>></a>
+                    </ul>
+                </nav>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">
+                                    Action
+                                </th>
+                                <th style="text-align:center">
+                                    Name
+                                </th>
+                                <th style="text-align:center">
+                                    Description
+                                </th>
+                                <th style="text-align:center">
+                                    Icount
+                                </th>
+                                <th style="text-align:center">
+                                    Created Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                foreach (var book in Model)
+                                {
+                                    <tr>
+                                        <td align="center">
+                                            <a id="btnEdit" asp-action="EditBook" asp-controller="Book" asp-route-id=" @book.BookId" class="btn btn-outline-info"> 
+                                                <i class="fa fa-edit"></i> Edit
+                                            </a>
+
+                                            <button class="btn btn-outline-danger" id="btnDeleteBook" data-user-userid="@book.BookId"> 
+                                                <i class="fa fa-trash"></i> Delete
+                                            </button>
+
+                                            <button class="btn btn-outline-success" id="btnDeleteBook" data-user-userid="@book.BookId"> 
+                                                <i class="fa fa-folder-open"></i> View Details
+                                            </button>
+                                        </td>
+
+                                        <td align="center">
+                                            @book.Name
+                                        </td>
+                                        <td align="center">
+                                            @book.Description
+                                        </td>
+                                        <td align="center">
+                                            @book.Icount
+                                        </td>
+                                        <td align="center">
+                                            @book.CreatedDate
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center"> No Data Available </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="deleteModal">
+</div>
+
+@section Scripts
+                                    {
+    <script>
+        $(function () {
+            $(document).on("click", "#btnDeleteBook", function () {
+                var bookID = $(this).data('user-userid')
+                console.log(bookID);
+                $.ajax({
+                    type: "GET",
+                    url: "Book/_DeleteBook",
+                    data: {
+                        id: bookID
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $('#deleteModal').append(response);
+                        $('#deletebookModal').modal("show");
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                });
+            });
+        });
+    </script>
+}

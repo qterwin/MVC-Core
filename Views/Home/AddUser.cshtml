@@ -1,0 +1,91 @@
+﻿@model mvccore.Models.Book.User
+
+@using (Html.BeginForm("AddUser", "Home", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="float-left">
+                        <h2>Add User</h2>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="mb-3">
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <li>@modelError.ErrorMessage</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, "Name")
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MiddleName, "MiddleName")
+                        @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Surname, "Surname")
+                        @Html.TextBoxFor(model => model.Surname, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, "Username")
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PassWord, "Password")
+                        @Html.TextBoxFor(model => model.PassWord, new { @class = "form-control" , @type="password" })
+                        @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <div class="float-right form-group">
+                <input type="submit" id="btnAddUser" class="btn btn-outline-success" value="Add User" />
+                <button type="button" class="btn btn-outline-primary" onclick="window.history.back()"> Cancel </button>
+            </div>
+
+        </div>
+
+    </div>
+
+}
